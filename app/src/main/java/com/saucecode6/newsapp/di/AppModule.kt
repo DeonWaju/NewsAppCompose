@@ -3,6 +3,7 @@ package com.saucecode6.newsapp.di
 import android.app.Application
 import com.saucecode6.newsapp.data.manager.LocalUserManagerImpl
 import com.saucecode6.newsapp.domain.manager.ILocalUserManager
+import com.saucecode6.newsapp.domain.usecases.AppEntryUsecases
 import com.saucecode6.newsapp.domain.usecases.ReadAppEntryUsecase
 import com.saucecode6.newsapp.domain.usecases.SaveAppEntryUsecase
 import dagger.Module
