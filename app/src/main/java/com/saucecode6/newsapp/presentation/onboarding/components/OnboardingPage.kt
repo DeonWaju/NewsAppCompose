@@ -1,5 +1,6 @@
 package com.saucecode6.newsapp.presentation.onboarding.components
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.widget.Space
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
@@ -57,7 +58,7 @@ fun OnboardingPage(
 }
 
 @Preview(showBackground = true)
-@Preview(uiMode = showBackground = true)
+@Preview(uiMode = UI_MODE_NIGHT_YES, showBackground = true)
 @Composable
 fun OnboardingPagePreview() {
     NewsAppTheme {
