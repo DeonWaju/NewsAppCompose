@@ -29,27 +29,27 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnboardingScreen(){
+fun OnboardingScreen() {
     Column(modifier = Modifier.fillMaxSize()) {
         val pagerState = rememberPagerState(initialPage = 0) {
             pages.size
         }
 
-        val buttonState = remember{
+        val buttonState = remember {
             derivedStateOf {
-                when(pagerState.currentPage){
+                when (pagerState.currentPage) {
                     0 -> listOf("", "Next")
-                    0 -> listOf("Back", "Next")
-                    0 -> listOf("Back", "GetStarted")
+                    1 -> listOf("Back", "Next")
+                    2 -> listOf("Back", "GetStarted")
                     else -> listOf("", "")
                 }
             }
         }
 
-        HorizontalPager(state = pagerState) {index ->
+        HorizontalPager(state = pagerState) { index ->
             OnboardingPage(page = pages[index])
         }
-        
+
         Spacer(modifier = Modifier.weight(1f))
         Row(
             modifier = Modifier
@@ -62,39 +62,41 @@ fun OnboardingScreen(){
             PageIndicator(
                 modifier = Modifier.width(PageIndicatorWidth),
                 pageSize = pages.size,
-                selectedPage = pagerState.currentPage)
-        }
-        Row(
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            val scope = rememberCoroutineScope()
-            if (buttonState.value[0].isNotEmpty()){
-                NewsTextButton(
-                    text = buttonState.value[0],
+                selectedPage = pagerState.currentPage
+            )
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                val scope = rememberCoroutineScope()
+                if (buttonState.value[0].isNotEmpty()) {
+                    NewsTextButton(
+                        text = buttonState.value[0],
+                        onClick = {
+                            scope.launch {
+                                pagerState.animateScrollToPage(
+                                    page = pagerState.currentPage - 1
+                                )
+                            }
+                        }
+                    )
+                }
+
+                NewsButton(
+                    text = buttonState.value[1],
                     onClick = {
                         scope.launch {
-                            pagerState.animateScrollToPage(
-                                page = pagerState.currentPage - 1
-                            )
+                            if (pagerState.currentPage == 3) {
+                                // TODO: Navigate
+                            } else {
+                                pagerState.animateScrollToPage(
+                                    page = pagerState.currentPage + 1
+                                )
+                            }
                         }
                     }
                 )
             }
-
-            NewsButton(
-                text = buttonState.value[1],
-                onClick = {
-                    scope.launch {
-                        if (pagerState.currentPage == 3){
-                            // TODO: Navigate
-                        } else{
-                            pagerState.animateScrollToPage(
-                                page = pagerState.currentPage + 1
-                            )
-                        }
-                    }
-                }
-            )
         }
     }
 }
