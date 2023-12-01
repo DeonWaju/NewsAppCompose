@@ -18,7 +18,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.saucecode6.newsapp.presentation.common.NewsButton
 import com.saucecode6.newsapp.presentation.common.NewsTextButton
 import com.saucecode6.newsapp.presentation.onboarding.Dimens.MediumPadding2
@@ -98,5 +97,6 @@ fun OnboardingScreen() {
                 )
             }
         }
+        Spacer(modifier = Modifier.weight(0.5f))
     }
 }
