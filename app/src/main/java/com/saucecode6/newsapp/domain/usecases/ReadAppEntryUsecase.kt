@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.Flow
 class ReadAppEntryUsecase(
     private val localUserManager: ILocalUserManager
 ) {
-    suspend operator fun invoke(): Flow<Boolean> =
+    operator fun invoke(): Flow<Boolean> =
         localUserManager.readAppEntry()
 }

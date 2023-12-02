@@ -22,18 +22,11 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @Inject
-    lateinit var appEntryUsecases: AppEntryUsecases
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         WindowCompat.setDecorFitsSystemWindows(window, false)
         installSplashScreen()
-        lifecycleScope.launch {
-            appEntryUsecases.readAppEntryUsecase().collect{
-                Log.d("Testdaggerhilt", it.toString())
-            }
-        }
         setContent {
             NewsAppTheme {
                 Box(modifier = Modifier.background(color = MaterialTheme.colorScheme.background)) {
