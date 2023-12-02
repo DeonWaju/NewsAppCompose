@@ -7,11 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.saucecode6.newsapp.domain.usecases.AppEntryUsecases
 import com.saucecode6.newsapp.presentation.navGraph.Route
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
+@HiltViewModel
 class MainViewModel @Inject constructor(
     private val appEntryUsecases: AppEntryUsecases
 ): ViewModel() {
@@ -24,7 +26,7 @@ class MainViewModel @Inject constructor(
     init {
         appEntryUsecases.readAppEntryUsecase().onEach { shouldStartFromHomeScreen ->
             if (shouldStartFromHomeScreen){
-                startDestination = Route.NewsNavigator.route
+                startDestination = Route.NewsNavigation.route
             } else{
                 startDestination = Route.AppStartNavigation.route
             }
