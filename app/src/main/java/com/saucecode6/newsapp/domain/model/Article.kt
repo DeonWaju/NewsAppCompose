@@ -1,4 +1,4 @@
-package com.saucecode6.newsapp.data.remote.dto
+package com.saucecode6.newsapp.domain.model
 
 data class Article(
     val author: String,
