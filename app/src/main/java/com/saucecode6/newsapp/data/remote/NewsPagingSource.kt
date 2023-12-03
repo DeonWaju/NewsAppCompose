@@ -11,12 +11,6 @@ class NewsPagingSource(
 ): PagingSource<Int, Article>() {
 
     private var totalNewsCount = 0
-    override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
-        return state.anchorPosition?.let {anchorPosition ->
-            val anchorPage = state.closestPageToPosition(anchorPosition)
-            anchorPage?.prevKey?.plus(1)?: anchorPage?.nextKey?.minus(1)
-        }
-    }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val page = params.key ?: 1
@@ -34,6 +28,13 @@ class NewsPagingSource(
             LoadResult.Error(
                 throwable = e
             )
+        }
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Article>): Int? {
+        return state.anchorPosition?.let {anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey?.plus(1)?: anchorPage?.nextKey?.minus(1)
         }
     }
 }
