@@ -87,13 +87,9 @@ fun OnboardingScreen(
                     text = buttonState.value[1],
                     onClick = {
                         scope.launch {
-                            if (pagerState.currentPage == 2) {
-                                event(OnboardingEvent.SaveAppEntry)
-                            } else {
-                                pagerState.animateScrollToPage(
-                                    page = pagerState.currentPage + 1
-                                )
-                            }
+                            if (pagerState.currentPage == 2)
+                                event(OnboardingEvent.SaveAppEntry) else
+                                pagerState.animateScrollToPage(page = pagerState.currentPage + 1)
                         }
                     }
                 )
