@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
@@ -18,6 +19,8 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.saucecode6.newsapp.R
 import com.saucecode6.newsapp.domain.model.Article
+import com.saucecode6.newsapp.presentation.common.SearchBar
+import com.saucecode6.newsapp.presentation.navGraph.Route
 import com.saucecode6.newsapp.presentation.onboarding.Dimens.MediumPadding1
 
 @Composable
@@ -50,6 +53,17 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit){
         )
         Spacer(modifier = Modifier.height(MediumPadding1))
 
-        SearchBar()
+        SearchBar(
+            modifier = Modifier
+                .padding(horizontal = MediumPadding1)
+                .fillMaxWidth(),
+            text = "",
+            readOnly = true,
+            onValueChange = {},
+            onSearch = {},
+            onClick = {
+                navigate(Route.SearchScreen.route)
+            }
+        )
     }
 }
