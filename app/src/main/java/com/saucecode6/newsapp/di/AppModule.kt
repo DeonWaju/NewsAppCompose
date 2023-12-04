@@ -11,6 +11,7 @@ import com.saucecode6.newsapp.domain.usecases.GetNews
 import com.saucecode6.newsapp.domain.usecases.NewsUsecases
 import com.saucecode6.newsapp.domain.usecases.ReadAppEntryUsecase
 import com.saucecode6.newsapp.domain.usecases.SaveAppEntryUsecase
+import com.saucecode6.newsapp.domain.usecases.SearchNews
 import com.saucecode6.newsapp.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -61,7 +62,8 @@ object AppModule {
         iNewsRepository: INewsRepository
     ): NewsUsecases {
         return NewsUsecases(
-            getNews = GetNews(iNewsRepository)
+            getNews = GetNews(iNewsRepository),
+            searchNews = SearchNews(iNewsRepository),
         )
     }
 }
