@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface INewsRepository {
 
     fun getNews(sources: List<String>): Flow<PagingData<Article>>
+    fun searchNews(searchQuery: String, sources: List<String>): Flow<PagingData<Article>>
 }
