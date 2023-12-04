@@ -2,10 +2,10 @@ package com.saucecode6.newsapp.presentation.search
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -22,8 +22,13 @@ fun SearchScreen(
 ) {
     Column(
         modifier = Modifier
-            .padding(top = MediumPadding1, start = MediumPadding1, end = MediumPadding1)
+            .padding(
+                top = MediumPadding1,
+                start = MediumPadding1,
+                end = MediumPadding1
+            )
             .statusBarsPadding()
+            .fillMaxSize()
     ) {
         SearchBar(
             text = state.searchQuery,
