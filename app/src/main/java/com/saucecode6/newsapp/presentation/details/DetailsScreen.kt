@@ -1,7 +1,9 @@
 package com.saucecode6.newsapp.presentation.details
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -44,11 +46,15 @@ fun DetailsScreen(
     ) {
         DetailsTopBar(
             onBrowsingClick = {
-                Intent(Intent.ACTION_VIEW).also {
-                    it.data = Uri.parse(article.url)
-                    if (it.resolveActivity(context.packageManager) != null) {
-                        context.startActivity(it)
+                try {
+                    Intent(Intent.ACTION_VIEW).also {
+                        it.data = Uri.parse(article.url)
+                        if (it.resolveActivity(context.packageManager) != null) {
+                            context.startActivity(it)
+                        }
                     }
+                } catch (e: Exception) {
+                    Log.e("error::::", e.message + e.printStackTrace())
                 }
             },
             onShareClick = {
@@ -73,7 +79,7 @@ fun DetailsScreen(
                 end = MediumPadding1,
                 top = MediumPadding1,
             )
-        ){
+        ) {
             item {
                 AsyncImage(
                     modifier = Modifier
@@ -89,7 +95,7 @@ fun DetailsScreen(
                 Text(
                     text = article.title,
                     style = MaterialTheme.typography.displaySmall,
-                    color = colorResource(id = R.color.text_title )
+                    color = colorResource(id = R.color.text_title)
                 )
                 Text(
                     text = article.content,
