@@ -1,5 +1,6 @@
 package com.saucecode6.newsapp.presentation.news_navigator.components
 
+import android.widget.Toast
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -12,9 +13,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.NavHost
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -24,6 +25,7 @@ import com.saucecode6.newsapp.R
 import com.saucecode6.newsapp.domain.model.Article
 import com.saucecode6.newsapp.presentation.bookmark.BookmarkScreen
 import com.saucecode6.newsapp.presentation.bookmark.BookmarkViewModel
+import com.saucecode6.newsapp.presentation.details.DetailsEvent
 import com.saucecode6.newsapp.presentation.details.DetailsScreen
 import com.saucecode6.newsapp.presentation.details.DetailsViewModel
 import com.saucecode6.newsapp.presentation.home.HomeScreen
@@ -38,8 +40,8 @@ fun NewsNavigator() {
     val bottomNavigationItem = remember {
         listOf(
             BottomNavigationItem(icon = R.drawable.ic_home, text = "Home"),
-            BottomNavigationItem(icon = R.drawable.ic_home, text = "Search"),
-            BottomNavigationItem(icon = R.drawable.ic_home, text = "BookMark")
+            BottomNavigationItem(icon = R.drawable.ic_search, text = "Search"),
+            BottomNavigationItem(icon = R.drawable.ic_bookmark, text = "BookMark")
         )
     }
 
@@ -130,13 +132,16 @@ fun NewsNavigator() {
             }
             composable(route = Route.DetailsScreen.route) {
                 val viewModel: DetailsViewModel = hiltViewModel()
+                if (viewModel.sideEffect != null) {
+                    Toast.makeText(LocalContext.current, "Saved", Toast.LENGTH_LONG)
+                    viewModel.onEvent(DetailsEvent.RemoveSideEffect)
+                }
                 navController.previousBackStackEntry?.savedStateHandle?.get<Article?>("article")
                     ?.let { article ->
                         DetailsScreen(
                             article = article,
                             event = viewModel::onEvent,
                             navigateUp = { navController.navigateUp() },
-//                            sideEffect = viewModel.sideEffect
                         )
                     }
 

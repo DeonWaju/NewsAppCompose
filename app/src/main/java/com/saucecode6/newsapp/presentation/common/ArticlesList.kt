@@ -29,8 +29,8 @@ fun ArticlesList(
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
         ) {
             items(count = articles.itemCount) {
-                articles[it]?.let {
-                    ArticleCard(article = it, onClick = { onClick(it) })
+                articles[it]?.let {article->
+                    ArticleCard(article = article, onClick = { onClick(article) })
                 }
             }
         }
@@ -49,9 +49,9 @@ fun ArticlesList(
         contentPadding = PaddingValues(all = ExtraSmallPadding2)
     ) {
         items(count = articles.size) {
-            val article = articles[it]
-            article.let {
-                ArticleCard(article = it, onClick = { onClick(it) })
+            val articles = articles[it]
+            articles.let { article ->
+                ArticleCard(article = article, onClick = { onClick(article) })
             }
         }
     }
