@@ -1,22 +1,15 @@
 package com.saucecode6.newsapp.presentation.navGraph
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
-import androidx.paging.compose.collectAsLazyPagingItems
-import com.saucecode6.newsapp.presentation.home.HomeScreen
-import com.saucecode6.newsapp.presentation.home.HomeViewModel
 import com.saucecode6.newsapp.presentation.onboarding.OnboardingScreen
 import com.saucecode6.newsapp.presentation.onboarding.OnboardingViewmodel
+import com.saucecode6.newsapp.presentation.search.SearchScreen
+import com.saucecode6.newsapp.presentation.search.SearchViewModel
 
 @Composable
 fun NavGraph(
@@ -44,9 +37,11 @@ fun NavGraph(
             startDestination = Route.HomeScreen.route
         ) {
             composable(route = Route.HomeScreen.route) {
-               val viewModel: HomeViewModel = hiltViewModel()
-                val articles = viewModel.news.collectAsLazyPagingItems()
-                HomeScreen(articles = articles, navigate ={})
+//               val viewModel: HomeViewModel = hiltViewModel()
+//                val articles = viewModel.news.collectAsLazyPagingItems()
+//                HomeScreen(articles = articles, navigate ={})
+               val viewModel: SearchViewModel = hiltViewModel()
+                SearchScreen(state = viewModel.state.value, event = viewModel::onEvent, navigate = {})
             }
         }
     }
