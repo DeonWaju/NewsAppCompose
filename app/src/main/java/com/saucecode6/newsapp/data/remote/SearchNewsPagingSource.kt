@@ -13,6 +13,8 @@ class SearchNewsPagingSource(
 
     private var totalNewsCount = 0
 
+    override val keyReuseSupported: Boolean = true
+
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Article> {
         val page = params.key ?: 1
         return try {
