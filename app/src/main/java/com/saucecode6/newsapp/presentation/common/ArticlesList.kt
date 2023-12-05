@@ -20,18 +20,38 @@ fun ArticlesList(
     modifier: Modifier = Modifier,
     articles: LazyPagingItems<Article>,
     onClick: (Article) -> Unit
-){
+) {
     val handlePagingResults = handlePagingResult(articles = articles)
     if (handlePagingResults) {
         LazyColumn(
-            modifier = Modifier.fillMaxSize(),
+            modifier = modifier.fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(MediumPadding1),
             contentPadding = PaddingValues(all = ExtraSmallPadding2)
-        ){
-            items(count = articles.itemCount) { 
-                articles[it]?.let { 
+        ) {
+            items(count = articles.itemCount) {
+                articles[it]?.let {
                     ArticleCard(article = it, onClick = { onClick(it) })
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun ArticlesList(
+    modifier: Modifier = Modifier,
+    articles: List<Article>,
+    onClick: (Article) -> Unit
+) {
+    LazyColumn(
+        modifier = modifier.fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(MediumPadding1),
+        contentPadding = PaddingValues(all = ExtraSmallPadding2)
+    ) {
+        items(count = articles.size) {
+            val article = articles[it]
+            article.let {
+                ArticleCard(article = it, onClick = { onClick(it) })
             }
         }
     }
@@ -66,8 +86,8 @@ fun handlePagingResult(articles: LazyPagingItems<Article>): Boolean {
 
 @Composable
 fun ShimmerEffect() {
-    Column(verticalArrangement = Arrangement.spacedBy(MediumPadding1)){
-        repeat(10){
+    Column(verticalArrangement = Arrangement.spacedBy(MediumPadding1)) {
+        repeat(10) {
             ArticleCardShimmerEffect(
                 modifier = Modifier.padding(horizontal = MediumPadding1)
             )
