@@ -17,10 +17,9 @@ import com.saucecode6.newsapp.domain.usecases.NewsUsecases
 import com.saucecode6.newsapp.domain.usecases.ReadAppEntryUsecase
 import com.saucecode6.newsapp.domain.usecases.SaveAppEntryUsecase
 import com.saucecode6.newsapp.domain.usecases.SearchNews
-import com.saucecode6.newsapp.domain.usecases.SelectArticle
-import com.saucecode6.newsapp.domain.usecases.SelectArticles
+import com.saucecode6.newsapp.domain.usecases.LocalArticle
+import com.saucecode6.newsapp.domain.usecases.AllLocalArticles
 import com.saucecode6.newsapp.domain.usecases.UpsertArticle
-import com.saucecode6.newsapp.util.Constants
 import com.saucecode6.newsapp.util.Constants.BASE_URL
 import com.saucecode6.newsapp.util.Constants.NEWS_DATABASE
 import dagger.Module
@@ -63,22 +62,22 @@ object AppModule {
     @Provides
     @Singleton
     fun provideINewsRepository(
-        newsApi: NewsApi
-    ): INewsRepository = NewsRepositoryImpl(newsApi)
+        newsApi: NewsApi,
+        newsDao: NewsDao
+    ): INewsRepository = NewsRepositoryImpl(newsApi, newsDao)
 
     @Provides
     @Singleton
     fun provideNewsUseCases(
         iNewsRepository: INewsRepository,
-        newsDao: NewsDao
     ): NewsUsecases {
         return NewsUsecases(
             getNews = GetNews(iNewsRepository),
             searchNews = SearchNews(iNewsRepository),
-            upsertArticle = UpsertArticle(newsDao),
-            deleteArticle = DeleteArticle(newsDao),
-            selectArticles = SelectArticles(newsDao),
-            selectArticle = SelectArticle(newsDao)
+            upsertArticle = UpsertArticle(iNewsRepository),
+            deleteArticle = DeleteArticle(iNewsRepository),
+            selectArticles = AllLocalArticles(iNewsRepository),
+            localArticle = LocalArticle(iNewsRepository)
         )
     }
 
