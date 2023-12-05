@@ -1,5 +1,8 @@
 package com.saucecode6.newsapp.domain.model
 
+import androidx.room.Entity
+
+@Entity
 data class Article(
     val author: String,
     val content: String,
