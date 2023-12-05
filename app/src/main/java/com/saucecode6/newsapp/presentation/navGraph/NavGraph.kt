@@ -6,6 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import com.saucecode6.newsapp.presentation.bookmark.BookmarkScreen
+import com.saucecode6.newsapp.presentation.bookmark.BookmarkViewModel
+import com.saucecode6.newsapp.presentation.news_navigator.components.NewsNavigator
 import com.saucecode6.newsapp.presentation.onboarding.OnboardingScreen
 import com.saucecode6.newsapp.presentation.onboarding.OnboardingViewmodel
 import com.saucecode6.newsapp.presentation.search.SearchScreen
@@ -37,11 +40,7 @@ fun NavGraph(
             startDestination = Route.HomeScreen.route
         ) {
             composable(route = Route.HomeScreen.route) {
-//               val viewModel: HomeViewModel = hiltViewModel()
-//                val articles = viewModel.news.collectAsLazyPagingItems()
-//                HomeScreen(articles = articles, navigate ={})
-               val viewModel: SearchViewModel = hiltViewModel()
-                SearchScreen(state = viewModel.state.value, event = viewModel::onEvent, navigate = {})
+                NewsNavigator()
             }
         }
     }

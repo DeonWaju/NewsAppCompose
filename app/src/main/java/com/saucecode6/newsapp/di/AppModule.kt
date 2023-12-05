@@ -17,6 +17,7 @@ import com.saucecode6.newsapp.domain.usecases.NewsUsecases
 import com.saucecode6.newsapp.domain.usecases.ReadAppEntryUsecase
 import com.saucecode6.newsapp.domain.usecases.SaveAppEntryUsecase
 import com.saucecode6.newsapp.domain.usecases.SearchNews
+import com.saucecode6.newsapp.domain.usecases.SelectArticle
 import com.saucecode6.newsapp.domain.usecases.SelectArticles
 import com.saucecode6.newsapp.domain.usecases.UpsertArticle
 import com.saucecode6.newsapp.util.Constants
@@ -76,7 +77,8 @@ object AppModule {
             searchNews = SearchNews(iNewsRepository),
             upsertArticle = UpsertArticle(newsDao),
             deleteArticle = DeleteArticle(newsDao),
-            selectArticles = SelectArticles(newsDao)
+            selectArticles = SelectArticles(newsDao),
+            selectArticle = SelectArticle(newsDao)
         )
     }
 

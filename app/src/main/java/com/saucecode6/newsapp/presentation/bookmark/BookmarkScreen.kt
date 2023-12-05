@@ -21,7 +21,7 @@ import com.saucecode6.newsapp.presentation.onboarding.Dimens.MediumPadding1
 @Composable
 fun BookmarkScreen(
     state: BookmarkState,
-    navigate: (String) -> Unit
+    navigateToDetails: (Article) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -37,7 +37,7 @@ fun BookmarkScreen(
         Spacer(modifier = Modifier.height(MediumPadding1))
         ArticlesList(
             articles = state.articles,
-            onClick = { navigate(Route.DetailsScreen.route) }
+            onClick = { navigateToDetails(it) }
         )
     }
 }

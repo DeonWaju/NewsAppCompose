@@ -31,7 +31,11 @@ import com.saucecode6.newsapp.presentation.onboarding.Dimens.MediumPadding1
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit){
+fun HomeScreen(
+    articles: LazyPagingItems<Article>,
+    navigateToSearch: () -> Unit,
+    navigateToDetails: (Article) -> Unit,
+){
     val titles by remember{
         derivedStateOf {
             if (articles.itemCount > 10){
@@ -68,7 +72,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit){
             onValueChange = {},
             onSearch = {},
             onClick = {
-                navigate(Route.SearchScreen.route)
+                navigateToSearch()
             }
         )
         Spacer(modifier = Modifier.height(MediumPadding1))
@@ -86,7 +90,7 @@ fun HomeScreen(articles: LazyPagingItems<Article>, navigate: (String) -> Unit){
             modifier = Modifier.padding(horizontal = MediumPadding1),
             articles = articles,
             onClick = {
-                //TODO: Navigate to Details Screen
+                navigateToDetails(it)
             }
         )
     }
