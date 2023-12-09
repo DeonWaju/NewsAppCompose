@@ -11,30 +11,31 @@ Save for Later: Save interesting articles for later reading.
 Dark Mode: Support for dark mode for a comfortable reading experience.
 
 ## Tech Stack
-Jetpack Compose: Modern Android UI toolkit for building native UIs.
-MVVM and MVI Architecture: Separation of concerns, making the codebase modular and maintainable.
-Clean Architecture: A software design philosophy that separates the application into distinct layers, promoting testability and maintainability.
-Datastore Preferences: A data storage solution for storing key-value pairs securely.
-Dagger Hilt: A dependency injection library for Android that reduces boilerplate code.
-Room: A SQLite object-mapping library to work with the local database.
-Retrofit: A type-safe HTTP client for making network requests.
-Paging 3: A library that helps with the efficient loading of large data sets from a data source.
-Getting Started
+Jetpack Compose: Modern Android UI toolkit for building native UIs.  
+MVVM and MVI Architecture: Separation of concerns, making the codebase modular and maintainable.  
+Clean Architecture: A software design philosophy that separates the application into distinct layers, promoting testability and maintainability.  
+Datastore Preferences: A data storage solution for storing key-value pairs securely.  
+Dagger Hilt: A dependency injection library for Android that reduces boilerplate code.  
+Room: A SQLite object-mapping library to work with the local database.  
+Retrofit: A type-safe HTTP client for making network requests.  
+Paging 3: A library that helps with the efficient loading of large data sets from a data source.  
+
+## Getting Started
 Clone the Repository:
 
 ```git clone https://github.com/your-username/NewsApp.git```
 
 API Key:
-Obtain an API key from newsapi.org and replace YOUR_API_KEY in the Constants.kt file in the utils package.
+Obtain an API key from newsapi.org and replace YOUR_API_KEY in the Constants.kt file in the utils package.  
 
 Build and Run:
-Open the project in Android Studio and build/run the app on an emulator or physical device.
+Open the project in Android Studio and build/run the app on an emulator or physical device.  
 
 Dependencies
-Jetpack Compose
-Kotlin Coroutines
-Dagger Hilt
-Retrofit
-Room
-Paging 3
-Datastore Preferences
+Jetpack Compose  
+Kotlin Coroutines  
+Dagger Hilt  
+Retrofit  
+Room  
+Paging 3  
+Datastore Preferences  
